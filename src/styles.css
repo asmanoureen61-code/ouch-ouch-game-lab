@@ -132,13 +132,51 @@
   --sidebar-ring: oklch(0.551 0.027 264.364);
 }
 
+/* ── OUCH OUCH game tokens ───────────────────────────────────────── */
+:root {
+  --game-bg: oklch(0.19 0.06 285);
+  --hud-foreground: oklch(0.97 0.01 280);
+  --hud-accent: oklch(0.82 0.18 78);
+  --hud-panel: oklch(0.28 0.05 285 / 55%);
+}
+
+@theme inline {
+  --color-game-bg: var(--game-bg);
+  --color-hud-foreground: var(--hud-foreground);
+  --color-hud-accent: var(--hud-accent);
+  --color-hud-panel: var(--hud-panel);
+}
+
+@utility game-viewport {
+  width: 100vw;
+  width: 100dvw;
+  height: 100vh;
+  height: 100dvh;
+}
+
+@utility safe-top {
+  padding-top: env(safe-area-inset-top, 0px);
+}
+
+@utility safe-bottom {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
 @layer base {
   * {
     border-color: var(--color-border);
   }
 
+  html,
   body {
-    background-color: var(--color-background);
-    color: var(--color-foreground);
+    overflow: hidden;
+    overscroll-behavior: none;
+  }
+
+  body {
+    background-color: var(--color-game-bg);
+    color: var(--color-hud-foreground);
+    -webkit-tap-highlight-color: transparent;
   }
 }
+
