@@ -1,24 +1,22 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
-export const Route = createFileRoute("/")({
-  component: Index,
-});
+import { GameScreen } from "@/game/components/GameScreen";
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
-function Index() {
-  return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
-  );
-}
+export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title: "OUCH OUCH — 3D Poke-the-Guy Browser Game" },
+      {
+        name: "description",
+        content:
+          "Tap, poke and smack a 3D ragdoll guy who yells OUCH. Build combos, rack up score. Plays instantly in your browser.",
+      },
+      { property: "og:title", content: "OUCH OUCH — 3D Poke-the-Guy Browser Game" },
+      {
+        property: "og:description",
+        content: "Tap the 3D guy, hear him yell OUCH, and chain combos for a high score.",
+      },
+    ],
+  }),
+  component: GameScreen,
+});
